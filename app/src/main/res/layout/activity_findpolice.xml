@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="구분 :"
+        android:id="@+id/text1"
+        android:layout_margin="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sort"
+        android:layout_marginRight="229dp"
+        android:layout_toEndOf="@+id/text1" />
+-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재 서 계시는 곳의 시/구/군을 입력하세요 (예:용산)"
+        android:id="@+id/text2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/slocal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="229dp"
+        android:layout_toEndOf="@+id/text2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Police"
+        android:id="@+id/find"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@+id/tell"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="찾으시는 경찰서는 여기 뜹니다^^"
+        android:id="@+id/mdata"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:inputType="textMultiLine"/>
+
+</LinearLayout>
