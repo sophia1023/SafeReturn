@@ -40,8 +40,6 @@ public class FindPolice extends Fragment {
         findButton = (Button) policeView.findViewById(R.id.find);
         TextView2 = (TextView) policeView.findViewById(R.id.mdata);
 
-
-
         findButton.setOnClickListener(new View.OnClickListener() {
 
             public String slocal;
