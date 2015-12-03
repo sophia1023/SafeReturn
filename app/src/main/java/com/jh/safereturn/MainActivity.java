@@ -26,17 +26,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     ListView navList;
-    String[] navItems ={"Police", "Siren", "home", "Test"};
+    String[] navItems ={"Police", "Siren", "home", "SendLocation"};
     ArrayAdapter<String> adapterDrawerList;
 
     FindPolice policeFr;
     FragmentHome homeFr;
     SirenMaker sirenFr;
     ShowLocation locationFr;
-
-
-
-
 
     //////////////////////
     long lastTime;

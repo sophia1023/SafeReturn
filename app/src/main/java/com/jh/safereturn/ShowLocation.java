@@ -10,6 +10,8 @@ import android.view.ViewGroup;
  */
 public class ShowLocation extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_one,container, false);
+        View locationView = inflater.inflate(R.layout.activity_maps, container,false);
+        final LocationSMS locationSMS  = ((LocationSMS)getActivity());
+        return locationView;
     }
 }
