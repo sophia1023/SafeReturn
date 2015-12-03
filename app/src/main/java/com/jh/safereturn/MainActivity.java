@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (accelerormeterSensor != null)
             sensorManager.registerListener(this, accelerormeterSensor,
                     SensorManager.SENSOR_DELAY_GAME);
+        mp.start();
     }
 
     @Override
