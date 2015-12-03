@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     float lastZ;
     float x, y, z;
 
-    private static final int SHAKE_THRESHOLD = 800;
+    private static final int SHAKE_THRESHOLD = 8000;
     private static final int DATA_X = SensorManager.DATA_X;
     private static final int DATA_Y = SensorManager.DATA_Y;
     private static final int DATA_Z = SensorManager.DATA_Z;
