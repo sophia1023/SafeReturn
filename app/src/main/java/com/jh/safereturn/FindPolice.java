@@ -27,7 +27,6 @@ public class FindPolice extends Fragment {
     EditText EditText2;
     Button findButton;
     TextView TextView2;
-    Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
