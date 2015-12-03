@@ -1,8 +1,12 @@
 package com.jh.safereturn;
 
-import android.app.Activity;
+
+
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,27 +15,35 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import android.support.v4.app.Fragment;
+
 
 import java.util.ArrayList;
 
 /**
  * Created by HUNNY on 2015-11-30.
  */
-public class FindPolice extends Activity{
+public class FindPolice extends Fragment {
     EditText EditText2;
     Button findButton;
     TextView TextView2;
+    Context context;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_findpolice);
         Parse.initialize(this, "GMPoXbwsPM7sNnBQYUUFYnkMkC4LiMxzOYaHcXgh", "1UfwfA5whNUf85Jwl1xbYgEjtRFCEixmKmjZOs44");
         ParseObject testObject = new ParseObject("PoliceDB");
+    }
 
-        EditText2 = (EditText) findViewById(R.id.slocal);
-        findButton = (Button) findViewById(R.id.find);
-        TextView2 = (TextView) findViewById(R.id.mdata);
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View policeView = inflater.inflate(R.layout.activity_findpolice, container,false);
+        EditText2 = (EditText) policeView.findViewById(R.id.slocal);
+        findButton = (Button) policeView.findViewById(R.id.find);
+        TextView2 = (TextView) policeView.findViewById(R.id.mdata);
+
+
 
         findButton.setOnClickListener(new View.OnClickListener() {
 
@@ -99,6 +111,6 @@ public class FindPolice extends Activity{
 
             }
         });
-
+        return policeView;
     }
 }
