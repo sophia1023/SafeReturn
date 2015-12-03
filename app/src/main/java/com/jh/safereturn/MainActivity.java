@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         /////////////////////////////
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mp = MediaPlayer.create(this, R.raw.police);
+
         ///////////////////////////////////////////////////////////
     }
 
@@ -148,9 +148,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onStart() {
         super.onStart();
-        if (accelerormeterSensor != null)
-            sensorManager.registerListener(this, accelerormeterSensor,
-                    SensorManager.SENSOR_DELAY_GAME);
+        if (accelerormeterSensor != null) {
+            sensorManager.registerListener(this, accelerormeterSensor, SensorManager.SENSOR_DELAY_GAME);
+            mp = MediaPlayer.create(this, R.raw.police);
+        }
         mp.start();
     }
 
