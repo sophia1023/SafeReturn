@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        //toolbar = (Toolbar)findViewById(R.id.toolbar);
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer);
         //setSupportActionBar(toolbar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.app_name,R.string.app_name);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        title=toolbar.getTitle();
+        //title=toolbar.getTitle();
 
         policeFr = new FindPolice();
         homeFr = new FragmentHome();
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         adapterDrawerList=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,navItems);
         navList.setAdapter(adapterDrawerList);
         navList.setOnItemClickListener(new DrawerItemClickListener());
-        toolbar.setOnClickListener(new ToolbarClickListener());
+       // toolbar.setOnClickListener(new ToolbarClickListener());
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, homeFr).commit();
     }
