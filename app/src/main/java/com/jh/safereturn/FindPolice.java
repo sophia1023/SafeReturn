@@ -32,7 +32,7 @@ public class FindPolice extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Parse.initialize(this, "GMPoXbwsPM7sNnBQYUUFYnkMkC4LiMxzOYaHcXgh", "1UfwfA5whNUf85Jwl1xbYgEjtRFCEixmKmjZOs44");
+        Parse.initialize(this.context, "GMPoXbwsPM7sNnBQYUUFYnkMkC4LiMxzOYaHcXgh", "1UfwfA5whNUf85Jwl1xbYgEjtRFCEixmKmjZOs44");
         ParseObject testObject = new ParseObject("PoliceDB");
     }
 
