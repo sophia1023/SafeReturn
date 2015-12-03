@@ -152,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             sensorManager.registerListener(this, accelerormeterSensor, SensorManager.SENSOR_DELAY_GAME);
             mp = MediaPlayer.create(this, R.raw.police);
         }
-        mp.start();
     }
 
     @Override
