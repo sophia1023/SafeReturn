@@ -1,16 +1,17 @@
 package com.jh.safereturn;
 
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     FindPolice policeFr;
     FragmentHome homeFr;
     SirenMaker sirenFr;
-    ShowLocation locationFr;
+    Bundle savedInstanceState;
 
     //////////////////////
     long lastTime;
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
         Parse.initialize(this, "GMPoXbwsPM7sNnBQYUUFYnkMkC4LiMxzOYaHcXgh", "1UfwfA5whNUf85Jwl1xbYgEjtRFCEixmKmjZOs44");
 
-
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.app_name,R.string.app_name);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         policeFr = new FindPolice();
         homeFr = new FragmentHome();
         sirenFr = new SirenMaker();
-        locationFr = new ShowLocation();
 
         navList = (ListView)findViewById(R.id.nav_list);
         adapterDrawerList=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,navItems);
@@ -101,7 +100,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, homeFr).commit();
                     break;
                 case 3:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, locationFr).commit();
+                    Intent myIntent = new Intent(MainActivity.this, LocationSMS.class);
+                    startActivity(myIntent);
                     break;
 
             }
