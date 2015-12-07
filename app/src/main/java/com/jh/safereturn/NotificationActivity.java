@@ -25,6 +25,7 @@ public class NotificationActivity extends Activity {
     TimePicker mTime;
     NotificationManager mNotification;
     EditText editText;
+    static String setMsg;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,7 @@ public class NotificationActivity extends Activity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        String setMsg = editText.getText().toString();
+        setMsg = editText.getText().toString();
 
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.SECOND, 0);
@@ -66,7 +67,7 @@ public class NotificationActivity extends Activity {
         PendingIntent pIntent= PendingIntent.getBroadcast(NotificationActivity.this, 0, intent,0);
         aManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         aManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pIntent);
-        intent.putExtra("sentMSG", setMsg);
+       // intent.putExtra("sentMSG", setMsg);
        // startActivity(intent);
     }
 }

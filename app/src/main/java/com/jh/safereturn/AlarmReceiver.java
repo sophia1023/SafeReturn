@@ -38,7 +38,7 @@ public class AlarmReceiver extends Service {
         super.onStart(intent, startID);
         //Toast.makeText(context, "Alarm worked.", Toast.LENGTH_SHORT).show();
 
-        String setMessage = intent.getStringExtra("sentMSG");
+        String setMessage = NotificationActivity.setMsg;
 
         nManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
         Intent intent1 = new Intent(this.getApplicationContext(),MainActivity.class);
