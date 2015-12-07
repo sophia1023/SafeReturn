@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,5 +34,8 @@
         </activity>
         <activity android:name=".LocationSMS"
             android:label="SafeReturn"></activity>
+        <activity android:name=".NotificationActivity">
+
+        </activity>
     </application>
 </manifest>
