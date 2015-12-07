@@ -1,6 +1,7 @@
 package com.jh.safereturn;
 
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.Parse;
 
@@ -33,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     FindPolice policeFr;
     FragmentHome homeFr;
     SirenMaker sirenFr;
-    Bundle savedInstanceState;
-
     //////////////////////
     long lastTime;
     float speed;
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     Sensor accelerormeterSensor;
     MediaPlayer mp;
     /////////////////////////////////////////
+    double latitude, longitude;
+    private GpsInfo gps;
+    ///////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +80,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         navList.setOnItemClickListener(new DrawerItemClickListener());
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, homeFr).commit();
 
-
         /////////////////////////////
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
         ///////////////////////////////////////////////////////////
+
+        gps = new GpsInfo(this);
+        // GPS 사용유무 가져오기
+        if (gps.isGetLocation()) {
+           latitude = gps.getLatitude();
+           longitude = gps.getLongitude();
+            Toast.makeText(
+                    getApplicationContext(),
+                    "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude,
+                    Toast.LENGTH_LONG).show();
+        } else {
+            // GPS 를 사용할수 없으므로
+            gps.showSettingsAlert();
+        }
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
@@ -111,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             drawerLayout.closeDrawer(navList);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -139,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -163,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     @Override
@@ -182,14 +197,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 if (speed > SHAKE_THRESHOLD) {
                     // 이벤트발생!!
                     mp.start();
+                    String phoneNumber = "01094932121";
+                    String message = "위도  : " + latitude + " 경도: " + longitude;
+                    sendSMS(phoneNumber, message);
                 }
-
                 lastX = event.values[DATA_X];
                 lastY = event.values[DATA_Y];
                 lastZ = event.values[DATA_Z];
             }
-
         }
-
     }
+
+     public void sendSMS(String phoneNumber, String message)
+    {
+        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0,
+                new Intent("SMS_SENT"), 0);
+
+        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0,
+                new Intent("SMS_DELIVERED"), 0);
+
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
+    }
+
 }

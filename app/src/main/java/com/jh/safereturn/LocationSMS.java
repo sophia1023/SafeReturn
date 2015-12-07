@@ -47,8 +47,7 @@ public class LocationSMS extends FragmentActivity implements LocationListener {
     LocationManager locationManager;
     String provider;
     LatLng latlng;
-    double latitude;
-    double longitude;
+    double latitude, longitude;
     LatLng receiveLoc;
     String receivelat, receivelon;
     boolean locationTag = true;
@@ -104,7 +103,6 @@ public class LocationSMS extends FragmentActivity implements LocationListener {
         this.init();
         ((Button)findViewById(R.id.sendLocation)).setOnClickListener(mClickListener);
         ((Button)findViewById(R.id.receiveLocation)).setOnClickListener(mClickListener);
-
     }
 
     public void setMyLocation(){
