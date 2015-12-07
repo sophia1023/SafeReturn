@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:weightSum="1">
 
-   <!-- <DatePicker
+    <!--<DatePicker
         android:layout_width="wrap_content"
         android:layout_height="136dp"
         android:id="@+id/datePicker" />-->
 
     <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timePicker" />
+        android:layout_width="226dp"
+        android:layout_height="256dp"
+        android:id="@+id/timePicker"
+        android:layout_weight="0.27" />
 
     <Button
         android:layout_width="wrap_content"

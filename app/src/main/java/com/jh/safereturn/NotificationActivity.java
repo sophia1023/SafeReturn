@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -20,13 +19,8 @@ import java.util.Calendar;
  */
 public class NotificationActivity extends Activity {
     private AlarmManager aManager;
-    // 설정 일시
-   // private GregorianCalendar mCalendar;
-    //일자 설정 클래스
-    DatePicker mDate;
     //시작 설정 클래스
     TimePicker mTime;
-
     NotificationManager mNotification;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +32,6 @@ public class NotificationActivity extends Activity {
         //알람 매니저를 취득
         aManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         //현재 시각을 취득
-        //mCalendar = new GregorianCalendar();
         mTime = (TimePicker)findViewById(R.id.timePicker);
 
         Button b = (Button)findViewById(R.id.btnAlaram);
@@ -47,10 +40,6 @@ public class NotificationActivity extends Activity {
                 setAlarm();
             }
         });
-
-        //일시 설정 클래스로 현재 시각을 설정
-        //mDate = (DatePicker)findViewById(R.id.datePicker);
-        // mDate.init(mCalendar.YEAR, mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH), this);
     }
 
     //알람의 설정
@@ -58,11 +47,14 @@ public class NotificationActivity extends Activity {
         Calendar calendar = Calendar.getInstance();
         int hour = mTime.getCurrentHour();
         int minute = mTime.getCurrentMinute();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND,0);
-        calendar.set(Calendar.YEAR, calendar.MONTH,calendar.DAY_OF_MONTH,hour,minute);
+        calendar.set(year,month,day,hour,minute);
 
         Intent intent = new Intent(NotificationActivity.this, MyReceiver.class);
         PendingIntent pIntent= PendingIntent.getBroadcast(NotificationActivity.this, 0, intent,0);
