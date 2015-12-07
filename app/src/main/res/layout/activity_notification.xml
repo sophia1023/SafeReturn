@@ -4,20 +4,21 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <DatePicker
-        android:layout_width="173dp"
-        android:layout_height="241dp"
-        android:id="@+id/datePicker" />
+   <!-- <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="136dp"
+        android:id="@+id/datePicker" />-->
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePicker" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/btnAlaram" />
-
-    <TimePicker
-        android:layout_width="245dp"
-        android:layout_height="167dp"
-        android:id="@+id/timePicker" />
+        android:text="알람맞추기"
+        android:id="@+id/btnAlaram"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

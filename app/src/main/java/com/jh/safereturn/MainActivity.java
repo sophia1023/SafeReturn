@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     startActivity(locationIntent);
                     break;
                 case 3:
-                    Intent myIntent = new Intent(MainActivity.this, LocationSMS.class);
-                    startActivity(myIntent);
+                    Intent notifyIntent = new Intent(MainActivity.this, NotificationActivity.class);
+                    startActivity(notifyIntent);
                     break;
                 case 4:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, homeFr).commit();
