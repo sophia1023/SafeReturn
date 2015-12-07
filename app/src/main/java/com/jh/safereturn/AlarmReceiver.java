@@ -36,7 +36,6 @@ public class AlarmReceiver extends Service {
     public void onStart(Intent intent, int startID) {
 
         super.onStart(intent, startID);
-        //Toast.makeText(context, "Alarm worked.", Toast.LENGTH_SHORT).show();
 
         String setMessage = NotificationActivity.setMsg;
 
@@ -48,26 +47,9 @@ public class AlarmReceiver extends Service {
 
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity( this.getApplicationContext(),0, intent1,PendingIntent.FLAG_UPDATE_CURRENT);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
-        notification.setLatestEventInfo(this.getApplicationContext(), "AlarmManagerDemo", setMessage, pendingNotificationIntent);
+        notification.setLatestEventInfo(this.getApplicationContext(), "SafeReturn", setMessage, pendingNotificationIntent);
 
         notification.sound = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, "6");
         nManager.notify(0, notification);
-
-        /*// TODO Auto-generated method stub
-        Intent contentIntent = new Intent(context, AlarmReceiver.class);
-        PendingIntent i = PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-       CharSequence from = "SafeReturn";
-        CharSequence message = "집에 갈 시간이야!! 통금엄수!!";
-
-        Notification notify = new Notification(R.drawable.gohome, "!!!!!!!",
-                System.currentTimeMillis());
-        // notifi.sound = Uri.withAppendedPath(Audio.Media.INTERNAL_CONTENT_URI, "6");
-        // notifi.flags = Notification.FLAG_INSISTENT;
-        notify.setLatestEventInfo(context, from, message, i);
-        NotificationManager nm = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        nm.notify(7777, notify);*/
-
     }
 }

@@ -192,36 +192,4 @@ public class LocationSMS extends FragmentActivity {
     public void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
-
-    /*@Override
-    public void onLocationChanged(Location location) {
-        if(locationTag){//한번만 위치를 가져오기 위해서 tag를 주었습니다
-            Log.d("myLog", "onLocationChanged: !!" + "onLocationChanged!!");
-            double lat =  location.getLatitude();
-            double lng = location.getLongitude();
-
-            Toast.makeText(LocationSMS.this, "위도  : " + lat + " 경도: " + lng, Toast.LENGTH_SHORT).show();
-            locationTag=false;
-        }
-
-    }
-
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
-
-    }*/
 }

@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +42,7 @@ public class NotificationActivity extends Activity {
         b.setOnClickListener (new View.OnClickListener() {
             public void onClick (View v) {
                 setAlarm();
+                finish();
             }
         });
     }
@@ -67,7 +67,5 @@ public class NotificationActivity extends Activity {
         PendingIntent pIntent= PendingIntent.getBroadcast(NotificationActivity.this, 0, intent,0);
         aManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         aManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pIntent);
-       // intent.putExtra("sentMSG", setMsg);
-       // startActivity(intent);
     }
 }

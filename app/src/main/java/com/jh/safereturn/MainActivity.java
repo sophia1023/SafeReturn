@@ -1,7 +1,9 @@
 package com.jh.safereturn;
 
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
@@ -14,16 +16,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     CharSequence title;
@@ -56,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     double latitude, longitude;
     private GpsInfo gps;
     ///////////////////////////////////////////
+    String savedphoneNum1;
+    String savedphoneNum2;
+    String getphoneNum;
+    String myPhoneNum;
+    //////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,24 +97,26 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         navList.setOnItemClickListener(new DrawerItemClickListener());
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, homeFr).commit();
 
-        /////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        ///////////////////////////////////////////////////////////
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         gps = new GpsInfo(this);
         // GPS 사용유무 가져오기
         if (gps.isGetLocation()) {
            latitude = gps.getLatitude();
            longitude = gps.getLongitude();
-            Toast.makeText(
-                    getApplicationContext(),
-                    "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude,
-                    Toast.LENGTH_LONG).show();
         } else {
             // GPS 를 사용할수 없으므로
             gps.showSettingsAlert();
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /*내 번호 받아오기*/
+        TelephonyManager telManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        myPhoneNum = telManager.getLine1Number();
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
@@ -197,9 +216,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 if (speed > SHAKE_THRESHOLD) {
                     // 이벤트발생!!
                     mp.start();
-                    String phoneNumber = "01094932121";
-                    String message = "위도  : " + latitude + " 경도: " + longitude;
-                    sendSMS(phoneNumber, message);
+                    load();
+                    String message = latitude + "\n" + longitude;
+                    sendSMS(getphoneNum, message);
                 }
                 lastX = event.values[DATA_X];
                 lastY = event.values[DATA_Y];
@@ -219,5 +238,65 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
     }
+
+    public void setting(){
+        final LinearLayout linear = (LinearLayout)
+                View.inflate(this, R.layout.dialog_setting, null);
+
+        new AlertDialog.Builder(this)
+                .setTitle("두 가지 번호를 '-'없이 입력")
+                .setView(linear)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        TextView text1 = (TextView) linear.findViewById(R.id.textView);
+                        EditText senderNum = (EditText) linear.findViewById(R.id.input_sender);
+                        TextView text2 = (TextView) linear.findViewById(R.id.textView2);
+                        EditText receiverNum = (EditText) linear.findViewById(R.id.input_receiver);
+                        savedphoneNum1 = senderNum.getText().toString();
+                        savedphoneNum2 = receiverNum.getText().toString();
+                        save();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                }).show();
+    }
+
+    private void save(){
+        try {
+            ParseACL defaultACL = new ParseACL();
+            defaultACL.setPublicReadAccess(true); // 해당 데이터에 대한 접근 권한을 모든 사람이 읽을 수 있도록 합니다.
+
+            ParseObject data = new ParseObject("Emergency"); // object 생성 및 추가될 class 이름 입력
+            data.put("sender", savedphoneNum1); // 데이터 입력
+            data.put("receiver", savedphoneNum2); // 데이터 입력
+            data.setACL(defaultACL); // object에 ACL set
+            data.save(); // parse.com에 해당 object save
+
+            Toast.makeText(this, "입력이 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void load(){
+        try {
+            ArrayList<ParseObject> datas = new ArrayList<ParseObject>(); // parse.com에서 읽어온 object들을 저장할 List
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Emergency"); // 서버에 mydatas class 데이터 요청
+            query.whereEqualTo("sender", myPhoneNum); // my_type이 1인 object만 읽어옴. 해당 함수 호출하지 않으면 class의 모든 데이터를 읽어옴.
+            datas.addAll(query.find()); // 읽어온 데이터를 List에 저장
+            StringBuffer str = new StringBuffer();
+            for (ParseObject object : datas) {
+                str.append(object.get("receiver"));
+            }
+            datas.clear();
+            getphoneNum = str.toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
