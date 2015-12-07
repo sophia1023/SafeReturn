@@ -10,6 +10,12 @@
         android:layout_height="136dp"
         android:id="@+id/datePicker" />-->
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_weight="0.27" />
+
     <TimePicker
         android:layout_width="226dp"
         android:layout_height="256dp"

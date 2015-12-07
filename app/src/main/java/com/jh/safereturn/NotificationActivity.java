@@ -7,8 +7,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -22,6 +24,7 @@ public class NotificationActivity extends Activity {
     //시작 설정 클래스
     TimePicker mTime;
     NotificationManager mNotification;
+    EditText editText;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ public class NotificationActivity extends Activity {
         aManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         //현재 시각을 취득
         mTime = (TimePicker)findViewById(R.id.timePicker);
+        editText = (EditText)findViewById(R.id.editText);
 
         Button b = (Button)findViewById(R.id.btnAlaram);
         b.setOnClickListener (new View.OnClickListener() {
@@ -51,6 +55,8 @@ public class NotificationActivity extends Activity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        String setMsg = editText.getText().toString();
+
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND,0);
@@ -60,5 +66,7 @@ public class NotificationActivity extends Activity {
         PendingIntent pIntent= PendingIntent.getBroadcast(NotificationActivity.this, 0, intent,0);
         aManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         aManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pIntent);
+        intent.putExtra("sentMSG", setMsg);
+       // startActivity(intent);
     }
 }
