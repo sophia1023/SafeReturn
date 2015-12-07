@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <!--
     <TextView
@@ -23,29 +24,40 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="현재 서 계시는 곳의 시/구/군을 입력하세요 (예:용산)"
+        android:text="현재 계시는 곳의 도로명을 입력하세요 \n(예:청파로)"
         android:id="@+id/text2"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"/>
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/slocal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="229dp"
-        android:layout_toEndOf="@+id/text2" />
+        android:layout_marginBottom="20dp"
+        android:textSize="20dp"/>
 
-    <Button
+    <TableRow
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Find Police"
-        android:id="@+id/find"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
-        android:layout_below="@+id/tell"/>
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/slocal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/text2" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="찾기"
+            android:textSize="15dp"
+            android:id="@+id/find"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/tell"
+            android:layout_gravity="right" />
+
+    </TableRow>
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,6 +66,20 @@
         android:id="@+id/mdata"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
-        android:inputType="textMultiLine"/>
+        android:inputType="textMultiLine"
+        android:textSize="18dp"
+        android:autoLink="phone"/>
+
+   <!-- <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전화걸기"
+        android:textSize="15dp"
+        android:id="@+id/call"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/tell"
+        android:layout_gravity="right" />-->
 
 </LinearLayout>

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     ListView navList;
-    String[] navItems ={"Police", "Siren", "home", "SendLocation"};
+    String[] navItems ={"위험알리미", "경찰서 찾기", "위치 알리미", "귀가 알리미", "홈"};
     ArrayAdapter<String> adapterDrawerList;
 
     FindPolice policeFr;
@@ -90,18 +90,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             switch (position){
                 case 0:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, policeFr).commit();
-
-                    break;
-                case 1:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, sirenFr).commit();
                     break;
+                case 1:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, policeFr).commit();
+                    break;
                 case 2:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, homeFr).commit();
+                    Intent locationIntent = new Intent(MainActivity.this, LocationSMS.class);
+                    startActivity(locationIntent);
                     break;
                 case 3:
                     Intent myIntent = new Intent(MainActivity.this, LocationSMS.class);
                     startActivity(myIntent);
+                    break;
+                case 4:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_place, homeFr).commit();
                     break;
 
             }
