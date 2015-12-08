@@ -5,9 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.net.Uri;
+import android.media.RingtoneManager;
 import android.os.IBinder;
-import android.provider.MediaStore;
 
 /**
  * Created by Jiyoung on 2015-12-07.
@@ -31,7 +30,6 @@ public class AlarmReceiver extends Service {
 
     }
 
-    @SuppressWarnings("staic-access")
     @Override
     public void onStart(Intent intent, int startID) {
 
@@ -43,13 +41,16 @@ public class AlarmReceiver extends Service {
         Intent intent1 = new Intent(this.getApplicationContext(),MainActivity.class);
 
         Notification notification = new Notification(R.drawable.gohome,setMessage, System.currentTimeMillis());
-        intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        PendingIntent pendingNotificationIntent = PendingIntent.getActivity( this.getApplicationContext(),0, intent1,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingNotificationIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        notification.flags |= Notification.FLAG_INSISTENT;
         notification.setLatestEventInfo(this.getApplicationContext(), "SafeReturn", setMessage, pendingNotificationIntent);
 
-        notification.sound = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, "6");
-        nManager.notify(0, notification);
+        notification.sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        notification.vibrate = new long[] { 0,500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500 };
+        notification.number++;
+        nManager.notify(1, notification);
     }
 }

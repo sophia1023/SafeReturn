@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
@@ -26,6 +27,7 @@ public class FindPolice extends Fragment {
     View policeView;
     String slocal;
     TextView TextView2;
+    ImageView imgView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +40,14 @@ public class FindPolice extends Fragment {
         EditText2 = (EditText) policeView.findViewById(R.id.slocal);
         findButton = (Button) policeView.findViewById(R.id.find);
         TextView2 = (TextView) policeView.findViewById(R.id.mdata);
+        imgView = (ImageView)policeView.findViewById(R.id.police);
 
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 slocal = EditText2.getText().toString();
+                imgView .setVisibility(View.INVISIBLE);
 
                 try {
                     ArrayList<ParseObject> datas = new ArrayList<ParseObject>(); // parse.com에서 읽어온 object들을 저장할 List

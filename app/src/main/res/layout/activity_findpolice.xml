@@ -6,41 +6,37 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="구분 :"
+        android:text="경찰서 찾기"
         android:id="@+id/text1"
-        android:layout_margin="20dp"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="#07adbf"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sort"
-        android:layout_marginRight="229dp"
-        android:layout_toEndOf="@+id/text1" />
--->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="현재 계시는 곳의 도로명을 입력하세요 \n(예:청파로)"
+        android:text="현재 계시는 곳의 '구'를 입력하세요 (예:용산)"
         android:id="@+id/text2"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:textSize="20dp"/>
+        android:layout_marginLeft="25dp"
+        android:textSize="15dp" />
 
     <TableRow
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp">
 
         <EditText
             android:layout_width="187dp"
             android:layout_height="wrap_content"
             android:id="@+id/slocal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
             android:layout_toEndOf="@+id/text2" />
 
@@ -62,24 +58,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="찾으시는 경찰서는 여기 뜹니다^^"
         android:id="@+id/mdata"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
         android:inputType="textMultiLine"
         android:textSize="18dp"
-        android:autoLink="phone"/>
+        android:autoLink="phone" />
 
-   <!-- <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전화걸기"
-        android:textSize="15dp"
-        android:id="@+id/call"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/tell"
-        android:layout_gravity="right" />-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/police"
+            android:src="@drawable/police"
+            android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

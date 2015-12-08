@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/shake"
+        android:src="@drawable/shakephone"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="ON 버튼을 누르고"
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="휴대폰을 위 아래로 흔들어 주세요"
+        android:id="@+id/textView5"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="START"
+        android:layout_marginTop="20dp"
+        android:text="ON"
         android:id="@+id/sirenStartBtn"
         android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="STOP"
+        android:text="OFF"
         android:id="@+id/sirenStopBtn"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

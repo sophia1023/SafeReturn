@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -41,7 +40,7 @@ public class LocationSMS extends FragmentActivity {
     private PolylineOptions polylineOptions;
     double latitude, longitude;
     LatLng receiveLoc;
-    String receivelat, receivelon;
+    String receivelat, receivelon = "";
     ArrayList<LatLng> arrayPoints;
     String sender;
 
@@ -49,7 +48,7 @@ public class LocationSMS extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        setUpMapIfNeeded();
+        onResume();
 
         gps = new GpsInfo(this);
         // GPS 사용유무 가져오기
@@ -70,7 +69,6 @@ public class LocationSMS extends FragmentActivity {
     }
 
     public void init() {
-        GooglePlayServicesUtil.isGooglePlayServicesAvailable(LocationSMS.this);
         mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         mMap.setMyLocationEnabled(true);
         mMap.animateCamera(CameraUpdateFactory.zoomTo(20));
@@ -81,7 +79,6 @@ public class LocationSMS extends FragmentActivity {
     @Override
     public void onResume() {
         super.onResume();
-        setUpMapIfNeeded();
         registerReceiver(mReceiverBR, new IntentFilter(
                 "android.provider.Telephony.SMS_RECEIVED"));
     }
@@ -107,7 +104,7 @@ public class LocationSMS extends FragmentActivity {
         }
     };
 
-    public void SmsLatLon() {
+    public void smsLatLon() {
         double lon = Double.parseDouble(receivelon);
         double lat = Double.parseDouble(receivelat);
         receiveLoc = new LatLng(lat,lon);
@@ -158,7 +155,7 @@ public class LocationSMS extends FragmentActivity {
                             }).show();
                     break;
                 case R.id.receiveLocation:
-                    SmsLatLon();
+                    smsLatLon();
                     break;
             }
         }
