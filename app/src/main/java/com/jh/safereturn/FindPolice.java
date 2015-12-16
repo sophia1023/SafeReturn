@@ -45,52 +45,50 @@ public class FindPolice extends Fragment {
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                slocal = EditText2.getText().toString();
+                readParse();
                 imgView .setVisibility(View.INVISIBLE);
-
-                try {
-                    ArrayList<ParseObject> datas = new ArrayList<ParseObject>(); // parse.com에서 읽어온 object들을 저장할 List
-                    ParseQuery<ParseObject> query = ParseQuery.getQuery("PoliceDB"); // 서버에 mydatas class 데이터 요청
-                    query.whereEqualTo("slocal", slocal); // my_type이 1인 object만 읽어옴. 해당 함수 호출하지 않으면 class의 모든 데이터를 읽어옴.
-                    datas.addAll(query.find()); // 읽어온 데이터를 List에 저장
-
-                    // 읽어온 데이터를 화면에 보여주기 위한 처리
-                    StringBuffer str = new StringBuffer();
-
-                    for (ParseObject object : datas) {
-                        str.append("◆");
-
-                        str.append(" ");
-                        str.append(object.get("local"));
-
-                        str.append(" ");
-                        str.append(object.get("slocal"));
-
-                        str.append(" ");
-                        str.append(object.get("road"));
-
-                        str.append(" ");
-                        str.append(object.get("pname"));
-                        str.append(object.get("type"));
-                        str.append(" \n ");
-
-                        str.append("  ");
-                        str.append("전화번호: ");
-                        str.append(object.get("phonenumber"));
-                        str.append("\n\n");
-                    }
-
-                    TextView2.setText(str.toString()); // TextView에 데이터를 넣어준다.
-                    Linkify.addLinks(TextView2, Linkify.PHONE_NUMBERS);
-
-                    datas.clear();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
             }
         });
         return policeView;
+    }
+
+    public void readParse(){
+        slocal = EditText2.getText().toString();
+
+        try {
+            ArrayList<ParseObject> datas = new ArrayList<ParseObject>(); // parse.com에서 읽어온 object들을 저장할 List
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("PoliceDB"); // 서버에 mydatas class 데이터 요청
+            query.whereEqualTo("slocal", slocal); // my_type이 1인 object만 읽어옴. 해당 함수 호출하지 않으면 class의 모든 데이터를 읽어옴.
+            datas.addAll(query.find()); // 읽어온 데이터를 List에 저장
+
+            // 읽어온 데이터를 화면에 보여주기 위한 처리
+            StringBuffer str = new StringBuffer();
+
+            for (ParseObject object : datas) {
+                str.append("◆");
+                str.append(" ");
+                str.append(object.get("local"));
+                str.append(" ");
+                str.append(object.get("slocal"));
+                str.append(" ");
+                str.append(object.get("road"));
+                str.append(" ");
+                str.append(object.get("pname"));
+                str.append(object.get("type"));
+                str.append(" \n ");
+                str.append("  ");
+                str.append("전화번호: ");
+                str.append(object.get("phonenumber"));
+                str.append("\n\n");
+            }
+
+            TextView2.setText(str.toString()); // TextView에 데이터를 넣어준다.
+            Linkify.addLinks(TextView2, Linkify.PHONE_NUMBERS);
+
+            datas.clear();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -16,18 +16,15 @@ public class AlarmReceiver extends Service {
     NotificationManager nManager;
 
     @Override
-    public IBinder onBind(Intent arg0)
-    {
+    public IBinder onBind(Intent arg0) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
-
     }
 
     @Override
@@ -38,9 +35,9 @@ public class AlarmReceiver extends Service {
         String setMessage = NotificationActivity.setMsg;
 
         nManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
-        Intent intent1 = new Intent(this.getApplicationContext(),MainActivity.class);
+        Intent intent1 = new Intent(this.getApplicationContext(), MainActivity.class);
 
-        Notification notification = new Notification(R.drawable.gohome,setMessage, System.currentTimeMillis());
+        Notification notification = new Notification(R.drawable.gohome, setMessage, System.currentTimeMillis());
         intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -49,7 +46,7 @@ public class AlarmReceiver extends Service {
         notification.setLatestEventInfo(this.getApplicationContext(), "SafeReturn", setMessage, pendingNotificationIntent);
 
         notification.sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        notification.vibrate = new long[] { 0,500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500 };
+        notification.vibrate = new long[]{0, 500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500, 10, 500};
         notification.number++;
         nManager.notify(1, notification);
     }

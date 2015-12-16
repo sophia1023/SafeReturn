@@ -163,12 +163,8 @@ public class LocationSMS extends FragmentActivity {
 
    public void sendSMS(String phoneNumber, String message)
     {
-        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0,
-                new Intent("SMS_SENT"), 0);
-
-        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0,
-                new Intent("SMS_DELIVERED"), 0);
-
+        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0,new Intent("SMS_SENT"), 0);
+        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0, new Intent("SMS_DELIVERED"), 0);
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
     }

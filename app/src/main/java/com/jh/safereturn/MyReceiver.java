@@ -12,5 +12,6 @@ public class MyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Intent service1 = new Intent(context, AlarmReceiver.class);
         context.startService(service1);
+        context.stopService(service1);
     }
 }
